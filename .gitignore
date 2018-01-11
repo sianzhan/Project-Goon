@@ -11,6 +11,7 @@
 *.userprefs
 
 # Build results
+
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -243,3 +244,9 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+/Project Goon/Debug/*
+!/Project Goon/Debug/*.dll
+!/Project Goon/Debug/*.obj
+!/Project Goon/Debug/*.mtl
+!/Project Goon/Debug/*.png
