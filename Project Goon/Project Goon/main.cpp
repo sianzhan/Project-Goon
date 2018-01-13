@@ -4,30 +4,26 @@
 #include <GLUT/glut.h>
 #include <fstream>
 #include <time.h>
+#include "Robot.h"
 #include "Texture/Texture.h"
 #include "Program/Program.h"
-#include "Robot.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include "main.h"
 
 Program program;
 mat4 Projection;
 mat4 View;
-mat4 Model;
 
 Robot robot;
 
-void initGL();
-void initShader();
+void init();
 void draw();
-void initShader();
+void reshape(int, int);
+void keyboard(unsigned char, int, int);
 void update(int);
-
-int texId = -1;
 
 int main(int argc, char* argv[])
 {
-	printf("TEST\n");
 	try
 	{
 		glutInit(&argc, argv);
@@ -43,11 +39,14 @@ int main(int argc, char* argv[])
 		}
 
 		glutDisplayFunc(draw);
+		glutReshapeFunc(reshape);
+		glutKeyboardFunc(keyboard);
 		glutTimerFunc(0, update, 0);
-		initGL();
-		initShader();
-		std::cout << "GLUT: Drawing" << std::endl;
+		init();
+
+		std::cout << "GLUT: Drawing\n" << std::endl;
 		glutMainLoop();
+
 	}
 	catch (std::exception e)
 	{
@@ -56,33 +55,30 @@ int main(int argc, char* argv[])
 	}
 }
 
-void initGL()
+void init()
 {
+	//initGL
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	texId = Texture::GenTexture("troll.png");
-	Projection = perspective(80.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-	View = lookAt(
-		glm::vec3(0, 0, 5), // Camera is at (0,10,25), in World Space
-		glm::vec3(0, 0, 0), // and looks at the origin
-		glm::vec3(0, -1, 0)  // Head is up (set to 0,1,0 to look upside-down)
-	);
-}
 
-void initShader()
-{
+	//init Shader
 	program.init();
 	program.loadShader(GL_VERTEX_SHADER, "s1.vert");
 	program.loadShader(GL_FRAGMENT_SHADER, "s1.frag");
+	program.loadShader(GL_GEOMETRY_SHADER, "s1.geo");
 	program.link();
 	program.use();
 
-
-	robot.init();
+	std::cout << std::endl;
+	robot.init("robot.txt");
 }
 
+void reshape(int width, int height)
+{
+	glViewport(0, 0, width, height);
+	Projection = perspective(radians(60.0f), (float)width/height, 0.1f, 300.0f);
+}
 
-#define PI 3.14159
 void draw()
 {
 	glCullFace(GL_FRONT);
@@ -97,8 +93,13 @@ void draw()
 
 }
 
+void keyboard(unsigned char key, int, int)
+{
+	if (key == 'r') robot.reload();
+}
+
 void update(int val) {
 	draw();
 	glutPostRedisplay();
-	glutTimerFunc(10, update, 0);
+	glutTimerFunc(20, update, 0);
 }

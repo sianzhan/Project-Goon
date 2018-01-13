@@ -10,6 +10,7 @@ class Program
 private:
 	GLuint program = 0;
 	GLuint vertex_shader = 0;
+	GLuint geometry_shader = 0;
 	GLuint fragment_shader = 0;
 public:
 	//Must init after glew has loaded

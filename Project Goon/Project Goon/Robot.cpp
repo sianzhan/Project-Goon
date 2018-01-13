@@ -1,110 +1,65 @@
 #include "Robot.h"
-#include "Texture/Texture.h"
 #include "main.h"
 #include <glm/gtc/matrix_transform.hpp>
 //Construct Robot and load it into buffer
+#define PI 3.14159f
+
 std::string Robot::exec = "Robot: ";
-void Robot::init()
+const mat4 Robot::identity4 = mat4(1.0);
+
+void Robot::init(std::string robot_path)
 {
-	parts.push_back(Part("UmbreonLowPoly.obj", "UmbreonLowPoly.mtl"));
-	//parts.push_back(Part("2B.obj", "2B.mtl"));
-	parts.push_back(Part("Churineout.obj", "Churineout.mtl"));
-
-	std::vector<vec3> out_vertices;
-	std::vector<vec2> out_uvs;
-	std::vector<vec3> out_normals;
-
-	for (int i = 0; i < parts.size(); ++i)
-	{
-		Part &part = parts[i];
-		std::vector<MtlInfo> out_mtl_infos; //moved in so that it won't stack together
-
-		//Load Mtl
-		if (!part.mtl_source.empty()) loadMtl(part.mtl_source, part.mtl);
-
-		//Load textures for material
-		for (std::map<std::string, Material>::iterator it = part.mtl.begin();
-			it != part.mtl.end(); it++)
-		{
-			Material &mtl = it->second;
-			if (mtl.tex_Kd == 0 && !mtl.map_Kd.empty())
-			{
-				mtl.tex_Kd = Texture::GenTexture(mtl.map_Kd.c_str());
-				if (mtl.tex_Kd) std::cout << exec << "Loaded Texture: " << mtl.map_Kd << std::endl;
-			}
-		}
-
-		//Load Faces
-		loadObj(part.obj_source, out_vertices, out_uvs, out_normals, out_mtl_infos);
-
-		part.count_vertices = out_vertices.size();
-		part.mtl_infos = out_mtl_infos;
-		if (i > 0)
-		{
-			part.count_vertices -= parts[i - 1].count_vertices;
-		}
-	}
-	uni_mtl_id = glGetUniformLocation(program.data(), "Material");
-
+	//Initiate VAO and Buffers
 	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
 	glGenBuffers(1, &vbo_vertices);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo_vertices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * out_vertices.size(), out_vertices.data(), GL_STATIC_DRAW);
-
 	glGenBuffers(1, &vbo_uvs);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo_uvs);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * out_uvs.size(), out_uvs.data(), GL_STATIC_DRAW);
-
 	glGenBuffers(1, &vbo_normals);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vec3) * out_normals.size(), out_normals.data(), GL_STATIC_DRAW);
-	
-	//put View & Projection matrix into Uniform Buffers
-	glGenBuffers(1, &ubo_vp);
-	glBindBuffer(GL_UNIFORM_BUFFER, ubo_vp);
-	glBufferData(GL_UNIFORM_BUFFER, sizeof(mat4) * 3, NULL, GL_DYNAMIC_DRAW);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), &View);
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), &Projection);
-	mat4 VP = Projection * View;
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4)*2, sizeof(mat4), &VP);
+	glGenBuffers(1, &ubo_mvp);
+	uni_mtl_id = glGetUniformLocation(program.data(), "Material");
+	unb_mvp_id = glGetUniformBlockIndex(program.data(), "mat_MVP"); //bound to ubo_mvp
 
-	glGetUniformBlockIndex(unb_vp_id, "mat_VP");
-	//get uniform struct size
-	int ubo_size = 0;
-	glGetActiveUniformBlockiv(program.data(), unb_vp_id, GL_UNIFORM_BLOCK_DATA_SIZE, &ubo_size);
-	//bind UBO to its idx
-	glBindBufferRange(GL_UNIFORM_BUFFER, 0, ubo_vp, 0, ubo_size);
-	glUniformBlockBinding(program.data(), unb_vp_id, 0);
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-	glBindVertexArray(0);
+	//Load Parts informations from file
+	loadRobotInfo(robot_path);
+	loadPart2Buffer();
+	loadStructure("struct.txt");
+	loadScript("script.txt");
+	action =&actions["walk"];
+	//printf("%d\n", action->keyframes.size());
 }
 
-int delta = 0;
+
+
+void Robot::reload()
+{
+	std::cout << exec << "Reloading..." << std::endl;
+	if (!struct_src.empty()) loadStructure(struct_src);
+	if (!script_src.empty()) loadScript(script_src);
+	frame[0] = -1;
+}
+
+float delta = 0;
 void Robot::render()
 {
-	delta++;
+	delta+=0.2;
+	update(delta);
 	glBindVertexArray(vao);
-	glBindBuffer(GL_UNIFORM_BUFFER, ubo_vp);
+	glBindBuffer(GL_UNIFORM_BUFFER, ubo_mvp);
+	float rad = 7;
 	View = lookAt(
-		glm::vec3(7 * sin(delta/40.0), sin(delta/107.0)+0.5, 7 * cos(delta/40.0)), // Camera is at (0,10,25), in World Space
-		glm::vec3(0, 00, 0), // and looks at the origin
-		glm::vec3(0, -1, 0)  // Head is up (set to 0,1,0 to look upside-down)
+		glm::vec3(rad * sin(0/40.0), sin(0/107.0)+0.5, rad * cos(0/40.0)), // Camera is at (0,10,25), in World Space
+		glm::vec3(0, 0, 0), // and looks at the origin
+		glm::vec3(0, 1, 0)  // Head is up (set to 0,1,0 to look upside-down)
 	);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), &View);
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), &Projection);
-	mat4 VP = Projection * View;
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4) * 2, sizeof(mat4), &VP);
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
 	GLuint offset_vbo = 0;
 	for (int i = 0; i < parts.size(); i++)
 	{
 		Part &part = parts[i];
+		mat4 MV = View * (*part.pivotModel)* part.Model;
+		mat4 MVP = Projection * MV;
+
+		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), &MV);
+		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(mat4), sizeof(mat4), &MVP);
 
 		glBindBuffer(GL_ARRAY_BUFFER, vbo_vertices);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)(offset_vbo * sizeof(vec3)));
@@ -123,7 +78,6 @@ void Robot::render()
 			MtlInfo &mtl_info = part.mtl_infos[k];
 			Material &mtl = part.mtl[mtl_info.material_name];
 
-			//printf("%d %s\n", k, mtl_info.material_name.c_str());
 			if (mtl.tex_Kd != 0)
 			{
 				glEnable(GL_TEXTURE_2D);
@@ -138,5 +92,60 @@ void Robot::render()
 			glDisable(GL_TEXTURE_2D);
 		}
 	}
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	glBindVertexArray(0);
+}
+void Robot::update(float time)
+{
+	static float time_offset = 0;
+	if (!action) return;
+	std::vector<Script::Keyframe> &keyframes = action->keyframes;
+
+	if (frame[0] >= (int)keyframes.size()) frame[0] = 0;
+	frame[1] = (frame[0] + 1) % keyframes.size();
+  	if (time - time_offset > keyframes[frame[1]].time) {
+		frame[0] = (frame[0] + 1) % keyframes.size();
+		frame[1] = (frame[0] + 1) % keyframes.size();
+		if (frame[0] == 0) time_offset = time;
+		for (Part &part : parts)
+		{
+			part.t_Model[0] = part.t_Model[1] = part.rawModel;
+			part.t_Rot[0] = part.t_Rot[1] = quat(1, 0, 0, 0);
+		}
+
+		for (int i = 0; i < 2; ++i)
+		{
+			auto it = keyframes[frame[i]].effects.begin();
+			for (; it != keyframes[frame[i]].effects.end(); ++it)
+			{
+				Part &part = *it->first;
+				auto &effects = it->second;
+				for (auto effect : effects)
+				{
+					if (effect.type == effect.ROTATE)
+					{
+						part.t_Rot[i] = angleAxis(radians(effect.theta), effect.xyz) * part.t_Rot[i];
+						//part.t_Model[i] = rotate(part.rawModel, radians(effect.theta), effect.xyz);
+					}
+					else if (effect.type == effect.SCALE)
+					{
+						part.t_Model[i] = scale(part.t_Model[i], effect.xyz);
+					}
+					else if (effect.type == effect.TRANSLATE)
+					{
+						part.t_Model[i] = translate(part.t_Model[i], effect.xyz);
+					}
+				}
+			}
+		}
+	}
+	float time_portion = (time - time_offset - keyframes[frame[0]].time + 1) 
+		/ (keyframes[frame[1]].time - keyframes[frame[0]].time + 1);
+	for (Part &part : parts)
+	{
+		//Part &part = parts[0];
+		//part.Model = mix(part.t_Model[0], part.t_Model[1], time_portion);
+		part.Model = (part.t_Model[1] * (time_portion)+part.t_Model[0] * (1 - time_portion));
+		part.Model *= toMat4(slerp(part.t_Rot[0], part.t_Rot[1], time_portion));
+	}
 }

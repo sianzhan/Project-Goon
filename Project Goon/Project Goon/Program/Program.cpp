@@ -1,6 +1,8 @@
 #include "Program.h"
 #include <fstream>
 #include <iostream>
+
+static const char *exec = "Program: ";
 void Program::init()
 {
 	program = glCreateProgram();
@@ -44,6 +46,7 @@ void Program::loadShader(GLenum shader_type, std::string filepath)
 	{
 	case GL_VERTEX_SHADER: shader_to_be_loaded = &vertex_shader; break;
 	case GL_FRAGMENT_SHADER: shader_to_be_loaded = &fragment_shader; break;
+	case GL_GEOMETRY_SHADER: shader_to_be_loaded = &geometry_shader; break;
 	default: std::runtime_error("Shader type not supported!");
 	}
 
@@ -53,8 +56,15 @@ void Program::loadShader(GLenum shader_type, std::string filepath)
 		glDeleteShader(*shader_to_be_loaded);
 	}
 	*shader_to_be_loaded = shader;
-	glAttachShader(program, *shader_to_be_loaded);
-	std::cout << "GLSL File(\'" << filepath << "\') loaded!" << std::endl;
+	if (shader != 0)
+	{
+		glAttachShader(program, *shader_to_be_loaded);
+		std::cout << exec << "GLSL File(\'" << filepath << "\') loaded!" << std::endl;
+	}
+	else
+	{
+		std::cout << exec << "GLSL File(\'" << filepath << "\') invalid shader!" << std::endl;
+	}
 }
 
 void Program::link()

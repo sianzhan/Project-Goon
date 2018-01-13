@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Texture.h"
 #include <stdexcept>
+#include <iostream>
 #include <libpng/png.h>
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
@@ -127,8 +128,15 @@ bool Texture::LoadPngImage(const char *name, int &outWidth, int &outHeight, bool
 	return true;
 }
 
+std::map<std::string, GLuint> texMap;
+std::string exec = "Texture: ";
 GLuint Texture::GenTexture(const char* filepath)
 {
+	std::map<std::string, GLuint>::iterator it;
+	if ((it = texMap.find(filepath)) != texMap.end())
+	{
+		return it->second;
+	}
 	const char *format = filepath;
 	unsigned int textureID = 0;
 	while (*format != 0) format++;
@@ -175,12 +183,10 @@ GLuint Texture::GenTexture(const char* filepath)
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, img->width, img->height, GL_BGR_EXT, GL_UNSIGNED_BYTE, img->imageData);
 		}
-		else
-		{
-			std::string msg = "failed to load texture " + std::string(filepath) + "\n";
-			throw std::runtime_error(msg);
-		}
 	}
+	if (textureID) std::cout << exec << "Loaded Texture: " << filepath << std::endl;
+	else std::cout << exec << "Failed to load texture:  " << filepath << std::endl;
+	texMap[filepath] = textureID;
 	return textureID;
 }
 

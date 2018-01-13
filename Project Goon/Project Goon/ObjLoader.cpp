@@ -87,12 +87,7 @@ bool loadObj(
 	std::cout << exec << "Read " << in_uvs.size() << " uvs" << std::endl;
 	std::cout << exec << "Read " << in_normals.size() << " normals" << std::endl;
 
-	/*for (int i = 0; i < in_faces.size(); ++i)
-	{
-		for (int j = 0; j < in_faces[i].size(); ++j) printf("%d/%d/%d ", in_faces[i][j][0], in_faces[i][j][1], in_faces[i][j][2]);
-		printf("\n");
-	}
-	printf("END\n");*/
+	face_counter = 0;
 	for (int i = 0; i < in_faces.size(); ++i)
 	{
 		//Every face is composed of many vertices
@@ -112,10 +107,11 @@ bool loadObj(
 				else out_uvs.push_back({ 0, 0 });
 				if (vertex_info[2] > 0) out_normals.push_back(in_normals[vertex_info[2]-1]);
 				else out_normals.push_back({ 0, 0 , 0});
+				face_counter++;
 			}
 		}
 	}
-	std::cout << exec << "Processed " << out_vertices.size() << " faces" << std::endl;
+	std::cout << exec << "Processed " << face_counter << " faces" << std::endl;
 	std::cout <<exec<< "Loaded Obj: \'" << obj_path << "\'" << std::endl;
 }
 
@@ -126,7 +122,7 @@ bool loadMtl(
 )
 {
 	std::string exec = "ObjLoader: ";
-	std::cout << '\n' << exec << "Loading Mtl: \'" << mtl_path << "\'" << std::endl;
+	std::cout << exec << "Loading Mtl: \'" << mtl_path << "\'" << std::endl;
 
 	std::ifstream ifs(mtl_path, std::ifstream::in);
 	if (!ifs) throw std::runtime_error(std::string("Unable to load mtl from path:\'") + mtl_path + '\'');
@@ -179,6 +175,6 @@ bool loadMtl(
 			}
 		}
 	}
-	std::cout <<exec<< "Loaded Mtl: \'" + mtl_path << std::endl;
+	std::cout <<exec<< "Loaded Mtl: \'" + mtl_path << '\'' << std::endl;
 
 }

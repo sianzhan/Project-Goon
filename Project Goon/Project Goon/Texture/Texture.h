@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <string>
 #include <vector>
-
+#include <map>
 
 namespace Texture {
 	bool	LoadPngImage(const char *name, int &outWidth, int &outHeight, bool &outHasAlpha, GLubyte **outData);
