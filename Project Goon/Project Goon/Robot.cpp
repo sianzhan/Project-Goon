@@ -34,7 +34,7 @@ void Robot::reload()
 	std::cout << exec << "Reloading..." << std::endl;
 	if (!struct_src.empty()) loadStructure(struct_src);
 	if (!script_src.empty()) loadScript(script_src);
-	frame[0] = -1;
+	for (Part &part : parts) part.frame[0] = -1;
 }
 
 float delta = 0;
@@ -55,7 +55,7 @@ void Robot::render()
 	for (int i = 0; i < parts.size(); i++)
 	{
 		Part &part = parts[i];
-		mat4 MV = View * (*part.pivotModel)* part.Model;
+		mat4 MV = View * part.getModel();
 		mat4 MVP = Projection * MV;
 
 		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(mat4), &MV);
@@ -97,55 +97,93 @@ void Robot::render()
 }
 void Robot::update(float time)
 {
-	static float time_offset = 0;
 	if (!action) return;
-	std::vector<Script::Keyframe> &keyframes = action->keyframes;
+	auto it = action->keyframes.begin();
+	for (; it != action->keyframes.end(); ++it)
+	{
+		Part &part = *it->first;
+		std::vector<Script::Keyframe> &keyframes = it->second;
+		if (keyframes.size() == 0) continue;
+		if (part.frame[0] >= (int)keyframes.size()) part.frame[0] = 0;
+		part.frame[1] = (part.frame[0] + 1) % keyframes.size();
+		
+		//Append the remaining time so that the shorter part can run in full cycle, with smooth transition end-to-front
+		const float &end_time = (part.frame[0] == keyframes.size()-1 && part.frame[1] == 0 ? 
+			action->max_time + keyframes[0].time : keyframes[part.frame[1]].time);
 
-	if (frame[0] >= (int)keyframes.size()) frame[0] = 0;
-	frame[1] = (frame[0] + 1) % keyframes.size();
-  	if (time - time_offset > keyframes[frame[1]].time) {
-		frame[0] = (frame[0] + 1) % keyframes.size();
-		frame[1] = (frame[0] + 1) % keyframes.size();
-		if (frame[0] == 0) time_offset = time;
-		for (Part &part : parts)
-		{
-			part.t_Model[0] = part.t_Model[1] = part.rawModel;
-			part.t_Rot[0] = part.t_Rot[1] = quat(1, 0, 0, 0);
-		}
+		if (time - part.time_offset > end_time) {
+			//printf("%d %d %f %f\n", part.frame[0], part.frame[1], time - part.time_offset, end_time);
+			part.frame[0] = (part.frame[0] + 1) % keyframes.size();
+			part.frame[1] = (part.frame[0] + 1) % keyframes.size();
+			if (part.frame[0] == 0) part.time_offset = time - keyframes[0].time;
 
-		for (int i = 0; i < 2; ++i)
-		{
-			auto it = keyframes[frame[i]].effects.begin();
-			for (; it != keyframes[frame[i]].effects.end(); ++it)
+			//part.t_Tra[0] = part.t_Tra[1] = vec3(0);
+			//part.t_Sca[0] = part.t_Sca[1] = vec3(1.0);
+			//part.t_Rot[0] = part.t_Rot[1] = quat(1, 0, 0, 0);
+			for (int i = 0; i < 2; ++i)
 			{
-				Part &part = *it->first;
-				auto &effects = it->second;
+				auto &effects = keyframes[part.frame[i]].effects;
+				for (auto effect : effects)
+				{
+					if (effect.type == effect.ROTATE)
+					{
+						part.t_Rot[i] = quat(1, 0, 0, 0);
+					}
+					else if (effect.type == effect.SCALE)
+					{
+						part.t_Sca[i] = vec3(1.0);
+					}
+					else if (effect.type == effect.TRANSLATE)
+					{
+						part.t_Tra[i] = vec3(0);
+					}
+				}
 				for (auto effect : effects)
 				{
 					if (effect.type == effect.ROTATE)
 					{
 						part.t_Rot[i] = angleAxis(radians(effect.theta), effect.xyz) * part.t_Rot[i];
-						//part.t_Model[i] = rotate(part.rawModel, radians(effect.theta), effect.xyz);
 					}
 					else if (effect.type == effect.SCALE)
 					{
-						part.t_Model[i] = scale(part.t_Model[i], effect.xyz);
+						part.t_Sca[i] *= effect.xyz;
 					}
 					else if (effect.type == effect.TRANSLATE)
 					{
-						part.t_Model[i] = translate(part.t_Model[i], effect.xyz);
+						part.t_Tra[i] += effect.xyz;
 					}
 				}
 			}
 		}
 	}
-	float time_portion = (time - time_offset - keyframes[frame[0]].time + 1) 
-		/ (keyframes[frame[1]].time - keyframes[frame[0]].time + 1);
-	for (Part &part : parts)
+	for (Part& part : parts)
 	{
-		//Part &part = parts[0];
-		//part.Model = mix(part.t_Model[0], part.t_Model[1], time_portion);
-		part.Model = (part.t_Model[1] * (time_portion)+part.t_Model[0] * (1 - time_portion));
-		part.Model *= toMat4(slerp(part.t_Rot[0], part.t_Rot[1], time_portion));
+		if (part.frame[0] < 0) continue;
+		std::vector<Script::Keyframe> &keyframes = action->keyframes[&part];
+
+		//Append the remaining time so that the shorter part can run in full cycle, with smooth transition end-to-front
+		const float &end_time = (part.frame[0] == keyframes.size() - 1 && part.frame[1] == 0 ?
+			action->max_time + keyframes[0].time : keyframes[part.frame[1]].time);
+		
+		//plus one to prevent divide by zero loooool
+		//tp : Time Portion
+		float tp = (time - part.time_offset - keyframes[part.frame[0]].time + 1)
+			/ (end_time - keyframes[part.frame[0]].time + 1);
+		
+		part.Model = scale(part.rawModel, part.t_Sca[0]*(1-tp) + part.t_Sca[1]*tp);
+		part.Model = translate(part.Model, part.t_Tra[0]*(1-tp) + part.t_Tra[1]*tp);
+		//part.Model = (part.t_Model[1] * (time_portion)+part.t_Model[0] * (1 - time_portion));
+		
+		//rotate at pivot
+		part.Model = translate(part.Model, part.pivotCoord);
+		part.Model *= toMat4(slerp(part.t_Rot[0], part.t_Rot[1], tp));
+		part.Model = translate(part.Model, -part.pivotCoord);
+
 	}
+}
+
+const mat4 Robot::Part::getModel() const
+{
+	if(pivotPart != nullptr) return pivotPart->getModel() * Model;
+	else return Model;
 }

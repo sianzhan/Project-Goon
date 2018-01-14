@@ -30,18 +30,25 @@ private:
 		//this hold the material data required to render
 		std::map<std::string, Material> mtl;
 
-		const mat4 * pivotModel = &identity4;
+		vec3 pivotCoord = vec3(0, 0, 0);
+		const Part * pivotPart = nullptr;
 		mat4 rawModel = mat4(1.0); //Model Matrix for every part, without applying effects
 		
 		//Model Matrix for every part, with applying effects
 		//0: current Model, 1: nextModel
-		mat4 t_Model[2] = { mat4(1.0), mat4(1.0) }; 
-		quat t_Rot[2];
+		vec3 t_Tra[2] = { vec3(0), vec3(0) };
+		vec3 t_Sca[2] = { vec3(1.0), vec3(1.0) };
+		quat t_Rot[2] = { quat(1, 0, 0, 0) };
 		mat4 Model = mat4(1.0);
 	
 		//Convenient Constructor
 		Part(std::string name, std::string obj) : name(name), obj_source(obj) {}
 		Part(std::string name, std::string obj, std::string mtl) : name(name), obj_source(obj), mtl_source(mtl) {}
+		
+		int frame[2] = { -1, -1 }; //0: current frame, 1: next frame
+		float time_offset = 0;
+
+		const mat4 getModel() const;
 	};
 
 	GLuint uni_mtl_id = 0;
@@ -70,10 +77,11 @@ private:
 				float theta;
 			};
 			float time;
-			std::map<Part*, std::vector<Effect>> effects;
+			std::vector<Effect> effects;
 		};
 		std::string name;
-		std::vector<Keyframe> keyframes;
+		std::map<Part*, std::vector<Keyframe>> keyframes;
+		float max_time = 0;
 		bool loop = 1;
 	};
 
@@ -82,7 +90,6 @@ private:
 	std::map<std::string, Script> actions;
 
 	Script *action = nullptr;
-	int frame[2] = { -1, -1}; //0: current frame, 1: next frame
 
 	bool loadStructure(std::string struct_path);
 	void loadPart2Buffer();

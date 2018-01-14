@@ -131,7 +131,8 @@ bool Robot::loadStructure(std::string struct_path)
 	}
 
 	std::string cmd, line;
-	std::stack<const mat4 * > matrixStack;
+	std::stack<const Part * > stack_part;
+	Part *ptr_part = nullptr;
 	mat4 *ptr_Model = nullptr, *ptr_raw_Model = nullptr;
 	vec3 pivot;
 	float x = 0, y = 0, z = 0, theta = 0;
@@ -158,34 +159,37 @@ bool Robot::loadStructure(std::string struct_path)
 			{
 				std::cout << '(' << struct_path << ':' << line_counter
 					<< ") Invalid part name: \'" << part_name << "\'" << std::endl;
+				ptr_part = nullptr;
 				ptr_Model = nullptr;
 				continue;
 			}
+			ptr_part = it->second;
 			Part &part = *it->second;
 			ptr_Model = &part.Model;
 			ptr_raw_Model = &part.rawModel;
 			pivot = vec3(0);
-			if (!matrixStack.empty() && matrixStack.top() != &part.Model)
-				part.pivotModel = matrixStack.top();
-			else part.pivotModel = &identity4;
+			if (!stack_part.empty() && stack_part.top() != ptr_part)
+				part.pivotPart = stack_part.top();
+			else part.pivotPart = nullptr;
 		}
-		else if (ptr_Model == nullptr)
+		else if (ptr_part == nullptr)
 		{
 			std::cout << '(' << struct_path << ':' << line_counter
 				<< ") Please load a part using \"usePart <part_id>\" first!" << std::endl;
 		}
-		else if (cmd == "pushMatrix")
+		else if (cmd == "pushMatrix") //setup Pivot Part
 		{
-			matrixStack.push(ptr_Model);
+			stack_part.push(ptr_part);
 		}
 		else if (cmd == "popMatrix")
 		{
-			matrixStack.pop();
+			stack_part.pop();
 		}
 		else if (cmd == "pivot" && ss >> x >> y >> z)
 		{
 			*ptr_Model = translate(*ptr_Model, -pivot);
 			pivot = vec3(x, y, z);
+			ptr_part->pivotCoord = pivot;
 			*ptr_Model = translate(*ptr_Model, pivot);
 		}
 		else if (cmd == "rotate" && ss >> theta >> x >> y >> z)
@@ -247,16 +251,24 @@ bool Robot::loadScript(std::string script_path)
 		if (cmd == "act" && ss >> act)
 		{
 			if (!tmp_script.name.empty()) {
-				if (tmp_keyframe.time >= 0)
-					tmp_script.keyframes.push_back(tmp_keyframe);
+				if (tmp_keyframe.time >= 0 && ptr_part) {
+					tmp_script.keyframes[ptr_part].push_back(tmp_keyframe);
+				}
+				tmp_script.max_time = time;
 				actions[tmp_script.name] = tmp_script;
 			}
 			tmp_script = Script();
 			tmp_script.name = act;
+
+			tmp_keyframe.effects.clear();
 			tmp_keyframe.time = -1; //Make it invalid
 		}
 		else if (cmd == "usePart" && ss >> part_name)
 		{
+			if (tmp_keyframe.time >= 0 && ptr_part)
+				tmp_script.keyframes[ptr_part].push_back(tmp_keyframe);
+			tmp_keyframe.effects.clear();
+
 			auto it = ref_parts.find(part_name);
 			if (it == ref_parts.end())
 			{
@@ -274,10 +286,12 @@ bool Robot::loadScript(std::string script_path)
 				std::cout << '(' << script_path << ':' << line_counter
 					<< ") Timing must be in incremental order" << std::endl;
 				return false;
-			}else if(tmp_keyframe.time >= 0) 
-				tmp_script.keyframes.push_back(tmp_keyframe);
-			tmp_keyframe = Script::Keyframe();
+			}else if(tmp_keyframe.time >= 0 && ptr_part) 
+				tmp_script.keyframes[ptr_part].push_back(tmp_keyframe);
+
+			tmp_keyframe.effects.clear();
 			tmp_keyframe.time = time;
+			ptr_part = nullptr;
 		}
 		else if (ptr_part == nullptr)
 		{
@@ -286,17 +300,17 @@ bool Robot::loadScript(std::string script_path)
 		}
 		else if (cmd == "rotate" && ss >> theta >> x >> y >> z)
 		{
-			tmp_keyframe.effects[ptr_part].push_back(
+			tmp_keyframe.effects.push_back(
 				Script::Keyframe::Effect{ Script::Keyframe::Effect::ROTATE, vec3(x, y, z), theta });
 		}
 		else if (cmd == "translate" && ss >> x >> y >> z)
 		{
-			tmp_keyframe.effects[ptr_part].push_back(
+			tmp_keyframe.effects.push_back(
 				Script::Keyframe::Effect{ Script::Keyframe::Effect::TRANSLATE, vec3(x, y, z) });
 		}
 		else if (cmd == "scale" && ss >> x >> y >> z)
 		{
-			tmp_keyframe.effects[ptr_part].push_back(
+			tmp_keyframe.effects.push_back(
 				Script::Keyframe::Effect{ Script::Keyframe::Effect::SCALE, vec3(x, y, z) });
 		}
 		else if ((cmd == "break")) break;
@@ -307,8 +321,10 @@ bool Robot::loadScript(std::string script_path)
 		}
 	}
 	if (!tmp_script.name.empty()) {
-		if (tmp_keyframe.time >= 0)
-			tmp_script.keyframes.push_back(tmp_keyframe);
+		if (tmp_keyframe.time >= 0 && ptr_part) {
+			tmp_script.keyframes[ptr_part].push_back(tmp_keyframe);
+		}
+		tmp_script.max_time = time;
 		actions[tmp_script.name] = tmp_script;
 	} //Assign the last keyframe
 
