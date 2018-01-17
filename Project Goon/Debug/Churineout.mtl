@@ -1,22 +1,20 @@
-# Blender MTL File: 'UmbreonLowPoly.blend'
-# Material Count: 2
+#
+#
+#
 
-newmtl ChurineBodyNl
-Ns 96.078431
+newmtl rdmobj00 Mesh_ChurineBodyNl
+illum 2
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
+Ns 96.078430
 map_Kd ChurineBodyNl.png
 
-newmtl ChurineEyeNl
-Ns 96.078431
+newmtl rdmobj01 Mesh_ChurineEyeNl
+illum 2
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
+Ns 96.078430
 map_Kd ChurineEyeNl.png
+

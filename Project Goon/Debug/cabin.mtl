@@ -1,0 +1,40 @@
+newmtl masa2
+map_Kd cabin/masa2Surface_Color.tif
+newmtl masa1
+map_Kd cabin/masa1Surface_Color.tif
+newmtl sandalye
+Kd 1 1 1
+map_Kd cabin/sandalyeSurface_Color.tif
+newmtl bank1
+Kd 1 1 1
+map_Kd cabin/bank1Surface_Color.tif
+newmtl bank2
+Kd 1 1 1
+map_Kd cabin/bank2Surface_Color.tif
+newmtl baca
+Kd 1 1 1
+map_Kd cabin/bacaSurface_Color.tif
+newmtl kapi
+map_Kd cabin/sea_texture_by_paulinemoss-d4vnhfx.jpg
+newmtl merdiven
+map_Kd cabin/merdivenSurface_Color.tif
+newmtl pencere3
+map_Kd troll.png
+newmtl pencere2
+map_Kd troll.png
+newmtl pencere1
+map_Kd troll.png
+newmtl korkuluk
+map_Kd cabin/korkulukSurface_Color.tif
+newmtl zemin
+#map_Kd cabin/zeminSurface_Color.tif
+newmtl balkon
+map_Kd cabin/caecbb5589bf5f74d7447b4e5d8e4ae6.jpg
+newmtl siperlik2
+map_Kd cabin/siperlik1Surface_Color.tif
+newmtl siperlik1
+map_Kd cabin/siperlik2Surface_Color.tif
+newmtl oda
+map_Kd cabin/digital_art_texture_68_by_mercurycode-d713utv.jpg
+newmtl cati
+map_Kd cabin/korkulukSurface_Color.tif

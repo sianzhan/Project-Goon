@@ -44,9 +44,15 @@ void Program::loadShader(GLenum shader_type, std::string filepath)
 
 	switch (shader_type)
 	{
-	case GL_VERTEX_SHADER: shader_to_be_loaded = &vertex_shader; break;
-	case GL_FRAGMENT_SHADER: shader_to_be_loaded = &fragment_shader; break;
-	case GL_GEOMETRY_SHADER: shader_to_be_loaded = &geometry_shader; break;
+	case GL_VERTEX_SHADER: 
+		shader_to_be_loaded = &vertex_shader; 
+		vertex_shader_src = filepath; break;
+	case GL_FRAGMENT_SHADER: 
+		shader_to_be_loaded = &fragment_shader;
+		fragment_shader_src = filepath; break;
+	case GL_GEOMETRY_SHADER: 
+		shader_to_be_loaded = &geometry_shader; 
+		geometry_shader_src = filepath; break;
 	default: std::runtime_error("Shader type not supported!");
 	}
 
@@ -75,4 +81,12 @@ void Program::link()
 void Program::use()
 {
 	glUseProgram(program);
+}
+
+void Program::reload()
+{
+	if (!vertex_shader_src.empty()) loadShader(GL_VERTEX_SHADER, vertex_shader_src);
+	if (!fragment_shader_src.empty()) loadShader(GL_FRAGMENT_SHADER, fragment_shader_src);
+	if (!geometry_shader_src.empty()) loadShader(GL_GEOMETRY_SHADER, geometry_shader_src);
+	link();
 }

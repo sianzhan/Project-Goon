@@ -12,9 +12,9 @@ using namespace glm;
 struct Material
 {
 	std::string name;
-	vec3 Ka;
-	vec3 Kd;
-	vec3 Ks;
+	vec3 Ka = vec3(0.0f, 0.0f, 0.0f);
+	vec3 Kd = vec3(1.0f, 1.0f, 1.0f);
+	vec3 Ks = vec3(1.0f, 1.0f, 1.0f);
 	unsigned int tex_Kd = 0;
 	std::string map_Kd;
 };

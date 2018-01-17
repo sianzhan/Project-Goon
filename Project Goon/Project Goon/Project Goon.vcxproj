@@ -81,7 +81,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glew32sd.lib;freeglutd.lib;zlibd.lib;libpng16d.lib;opencv_core2413d.lib;opencv_highgui2413d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32sd.lib;glfw3.lib;zlibd.lib;libpng16d.lib;opencv_core2413d.lib;opencv_highgui2413d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
@@ -125,6 +125,7 @@
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="RobotLoader.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -83,9 +83,9 @@ bool loadObj(
 	//push back the last active mtl
 	if (face_counter > 0) out_mtl_infos.push_back(MtlInfo(mtl_name, face_counter));
 
-	std::cout << exec << "Read " << in_vertices.size() << " vertices" << std::endl;
-	std::cout << exec << "Read " << in_uvs.size() << " uvs" << std::endl;
-	std::cout << exec << "Read " << in_normals.size() << " normals" << std::endl;
+	std::cout << exec << "Read " << in_vertices.size() << " vertices\n";
+	std::cout << exec << "Read " << in_uvs.size() << " uvs\n";
+	std::cout << exec << "Read " << in_normals.size() << " normals\n";
 
 	face_counter = 0;
 	for (int i = 0; i < in_faces.size(); ++i)
@@ -111,7 +111,7 @@ bool loadObj(
 			}
 		}
 	}
-	std::cout << exec << "Processed " << face_counter << " faces" << std::endl;
+	std::cout << exec << "Processed " << face_counter << " faces\n";
 	std::cout <<exec<< "Loaded Obj: \'" << obj_path << "\'" << std::endl;
 }
 
