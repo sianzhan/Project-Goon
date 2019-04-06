@@ -1,0 +1,3 @@
+struct house_struct.txt
+shader house_shaders.txt
+Cabin cabin.obj cabin.mtl

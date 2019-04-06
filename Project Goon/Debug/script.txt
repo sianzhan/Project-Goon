@@ -1,0 +1,739 @@
+act walk
+
+time 0
+
+usePart 2B_head
+rotate 10 1 0 0
+
+usePart 2B_body
+translate 0 20 0
+
+usePart 2B_leftarm
+rotate -30 1 0 1
+
+usePart 2B_leftleg
+rotate -40 1 0 0
+usePart 2B_leftthight
+rotate 40 1 0 0
+usePart 2B_leftfeet
+rotate 20 1 0 0
+
+usePart Petilil
+rotate 0 0 1 0
+
+time 1
+
+usePart 2B_leftfeet
+rotate 0 1 0 0
+
+usePart 2B_rightleg
+rotate 10 1 0 0
+usePart 2B_rightfeet
+rotate -20 1 0 0
+
+time 3
+
+usePart 2B_leftleg
+rotate -10 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_leftfeet
+rotate 0 1 0 0
+scale 1 0.5 1
+
+time 4
+usePart 2B_body
+translate 36 19 -18
+rotate 150 0 1 0
+
+usePart 2B_rightthight
+scale 1 1 1
+
+usePart Petilil
+translate 40 19 -50
+
+time 5
+usePart 2B_rightthight
+rotate 60 1 0 0
+usePart 2B_rightfeet
+scale 1 1 1
+
+time 5.5
+
+usePart 2B_rightarm
+rotate -30 1 0 0.1
+
+usePart 2B_rightleg
+rotate -40 1 0 0
+usePart 2B_rightfeet
+rotate -30 1 0 0
+
+
+time 6
+usePart 2B_head
+rotate 0 1 0 0
+
+usePart 2B_leftarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftleg
+rotate 20 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+usePart 2B_leftfeet
+rotate 10 1 0 0
+
+
+
+time 7
+usePart 2B_body
+translate 36 20 -66
+rotate 0 0 1 0
+
+usePart 2B_rightthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_rightfeet
+scale 1 0.5 1
+
+
+time 9
+usePart 2B_body
+rotate 10 0 1 0
+
+usePart Mario_hat
+translate 0 0 0
+rotate 330 0 0 0
+
+time 10
+
+usePart 2B_rightarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftthight
+scale 1 1 1
+usePart 2B_leftfeet
+scale 1 1 1
+usePart 2B_rightthight
+scale 1.2 3 1.2
+
+usePart 2B_rightleg
+rotate 20 1 0 0
+usePart 2B_rightfeet
+rotate 10 1 0 0
+
+time 11
+
+usePart 2B_head
+rotate 10 1 0 0
+
+
+usePart 2B_leftarm
+rotate -30 1 0 1
+
+usePart 2B_leftleg
+rotate -40 1 0 0
+usePart 2B_leftthight
+rotate 40 1 0 0
+usePart 2B_leftfeet
+rotate 20 1 0 0
+
+usePart Petilil
+translate 50 30 -20
+rotate -30 1 1 0
+rotate 180 0 1 0
+
+usePart Mario_hat
+translate 0 20 0
+rotate 0 0 0 0
+
+time 12
+usePart 2B_body
+translate 60 20 -30
+rotate 10 0 1 0
+usePart 2B_head
+scale 1 1 1
+usePart 2B_leftfeet
+rotate 0 1 0 0
+
+usePart 2B_rightleg
+rotate 10 1 0 0
+usePart 2B_rightfeet
+rotate -20 1 0 0
+
+time 14
+usePart 2B_leftleg
+rotate -10 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_leftfeet
+rotate 0 1 0 0
+scale 1 0.5 1
+
+time 15
+usePart 2B_body
+translate 42 22 12
+rotate -10 0 1 0
+usePart 2B_rightthight
+scale 1 1 1
+
+time 16
+usePart 2B_head
+scale 3 3 3
+usePart 2B_rightthight
+rotate 60 1 0 0
+usePart 2B_rightfeet
+scale 1 1 1
+
+usePart Mario_hat
+translate 0 0 10
+rotate 179 0 1 0
+
+time 16.5
+usePart 2B_head
+rotate -10 1 0 0
+rotate -30 0 1 0
+
+usePart 2B_rightarm
+rotate -30 1 0 0.1
+
+usePart 2B_rightleg
+rotate -40 1 0 0
+usePart 2B_rightfeet
+rotate -30 1 0 0
+
+
+time 17
+usePart 2B_leftarm
+rotate 30 1 0 0.1
+usePart 2B_lefthand
+scale 1 1 1
+
+usePart 2B_leftleg
+rotate 20 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+usePart 2B_leftfeet
+rotate 10 1 0 0
+
+time 19
+usePart 2B_body
+translate 0 20 24
+rotate -90 0 1 0
+usePart 2B_head
+scale 1 1 1
+usePart 2B_lefthand
+scale 3 3 3
+
+usePart 2B_rightthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_rightfeet
+scale 1 0.5 1
+
+usePart Petilil
+translate 0 0 0
+rotate 300 0 1 0
+
+time 20
+usePart 2B_head
+rotate 15 1 0 0
+rotate 15 0 1 0
+
+usePart 2B_rightarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftthight
+scale 1 1 1
+usePart 2B_leftfeet
+scale 1 1 1
+usePart 2B_rightthight
+scale 1.2 3 1.2
+
+usePart 2B_rightleg
+rotate 20 1 0 0
+usePart 2B_rightfeet
+rotate 10 1 0 0
+
+usePart Mario_hat
+translate 0 0 0
+rotate 330 0 1 0
+
+time 21
+usePart 2B_leftarm
+rotate -30 1 0 1
+
+usePart 2B_leftleg
+rotate -40 1 0 0
+usePart 2B_leftthight
+rotate 40 1 0 0
+usePart 2B_leftfeet
+rotate 20 1 0 0
+
+time 22
+usePart 2B_lefthand
+scale 1 1 1
+usePart 2B_leftfeet
+rotate 0 1 0 0
+
+usePart 2B_rightleg
+rotate 10 1 0 0
+usePart 2B_rightfeet
+rotate -20 1 0 0
+
+usePart Petilil
+rotate 90 0 1 0
+
+usePart Mario_hat
+translate 0 3 0
+rotate 120 0 1 0
+
+time 23
+usePart 2B_body
+translate -36 23 12
+
+usePart 2B_leftleg
+rotate -10 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_leftfeet
+rotate 0 1 0 0
+scale 1 0.5 1
+
+time 24
+usePart 2B_rightthight
+scale 1 1 1
+
+time 25
+usePart 2B_rightthight
+rotate 60 1 0 0
+usePart 2B_rightfeet
+scale 1 1 1
+
+usePart Mario_hat
+translate 10 0 20
+rotate 290 0 1 0
+
+time 26
+
+usePart 2B_rightarm
+rotate -30 1 0 0.1
+
+usePart 2B_rightleg
+rotate -40 1 0 0
+usePart 2B_rightfeet
+rotate -30 1 0 0
+
+
+usePart Petilil
+rotate 269 0 1 0
+
+time 27
+usePart 2B_body
+translate -60 19 -30
+
+usePart 2B_leftarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftleg
+rotate 20 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+usePart 2B_leftfeet
+rotate 10 1 0 0
+
+
+
+time 28
+
+usePart 2B_rightthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_rightfeet
+scale 1 0.5 1
+
+usePart Mario_hat
+translate 0 3 0
+rotate 0 0 1 0
+
+
+time 30
+
+usePart 2B_rightarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftthight
+scale 1 1 1
+usePart 2B_leftfeet
+scale 1 1 1
+usePart 2B_rightthight
+scale 1.2 3 1.2
+
+usePart 2B_rightleg
+rotate 20 1 0 0
+usePart 2B_rightfeet
+rotate 10 1 0 0
+
+
+time 31
+
+usePart 2B_body
+translate -36 20 -66
+rotate 180 0 1 0
+
+usePart 2B_leftarm
+rotate -30 1 0 1
+
+usePart 2B_leftleg
+rotate -40 1 0 0
+usePart 2B_leftthight
+rotate 40 1 0 0
+usePart 2B_leftfeet
+rotate 20 1 0 0
+
+usePart Mario_hat
+scale 1 1 1
+translate 0 0 0
+rotate 0 0 1 0
+
+time 32
+usePart 2B_head
+rotate 15 1 0 0
+
+usePart 2B_body
+rotate 10 0 1 0
+
+usePart 2B_leftfeet
+rotate 0 1 0 0
+
+usePart 2B_rightleg
+rotate 10 1 0 0
+usePart 2B_rightfeet
+rotate -20 1 0 0
+
+time 33
+
+usePart 2B_leftleg
+rotate -10 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_leftfeet
+rotate 0 1 0 0
+scale 1 0.5 1
+
+usePart Mario_hat
+rotate 179 0 1 0
+
+time 34
+usePart 2B_body
+translate -36 19 -18
+rotate 30 0 1 0
+
+usePart 2B_rightthight
+scale 1 1 1
+
+time 35
+usePart 2B_rightthight
+rotate 120 1 0 0
+usePart 2B_rightfeet
+scale 1 1 1
+
+usePart Mario_hat
+scale 3 3 3
+translate 30 10 30
+rotate 300 0 1 0
+
+time 36
+usePart 2B_head
+rotate 0 1 0 0
+
+usePart 2B_rightarm
+rotate -30 1 0 0.1
+
+usePart 2B_rightleg
+rotate -40 1 0 0
+usePart 2B_rightfeet
+rotate -30 1 0 0
+
+
+time 36.5
+usePart 2B_leftarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftleg
+rotate 20 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+usePart 2B_leftfeet
+rotate 10 1 0 0
+
+usePart Petilil
+translate 12 30 -20
+rotate 0 0 1 0
+
+
+time 38
+usePart 2B_body
+translate 0 21 0
+rotate 90 0 1 0
+
+usePart 2B_rightthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_rightfeet
+scale 1 0.5 1
+
+usePart Mario_hat
+scale 1 1 1
+translate 0 5 30
+rotate 360 0 1 0
+
+time 40
+usePart 2B_body
+rotate 180 0 1 0
+
+usePart 2B_rightarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftthight
+scale 1 1 1
+usePart 2B_leftfeet
+scale 1 1 1
+usePart 2B_rightthight
+scale 1.2 3 1.2
+
+usePart 2B_rightleg
+rotate 20 1 0 0
+usePart 2B_rightfeet
+rotate 10 1 0 0
+
+time 41
+
+usePart 2B_body
+translate 30 20 -30
+rotate 120 0 1 0
+
+usePart 2B_leftarm
+rotate -30 1 0 1
+usePart 2B_leftleg
+rotate -40 1 0 0
+usePart 2B_leftthight
+rotate 40 1 0 0
+usePart 2B_leftfeet
+rotate 20 1 0 0
+
+usePart Mario_hat
+scale 2 2 2
+translate -30 15 30
+rotate 120 0 1 0
+
+time 42
+
+usePart 2B_leftfeet
+rotate 0 1 0 0
+
+usePart 2B_rightleg
+rotate 10 1 0 0
+usePart 2B_rightfeet
+rotate -20 1 0 0
+
+time 44
+
+usePart 2B_leftleg
+rotate -10 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_leftfeet
+rotate 0 1 0 0
+scale 1 0.5 1
+
+time 45
+usePart 2B_body
+rotate 180 0 1 0
+
+usePart 2B_rightthight
+scale 1 1 1
+
+time 46
+usePart 2B_rightthight
+rotate 60 1 0 0
+usePart 2B_rightfeet
+scale 1 1 1
+
+usePart Mario_hat
+scale 1 1 1
+translate 0 5 0
+rotate 330 0 1 0
+
+time 47.5
+
+usePart 2B_rightarm
+rotate -30 1 0 0.1
+
+usePart 2B_rightleg
+rotate -40 1 0 0
+usePart 2B_rightfeet
+rotate -30 1 0 0
+
+usePart Petilil
+translate 0 10 -20
+rotate -30 0 1 1
+
+time 48
+usePart 2B_body
+translate 12 22 -66
+rotate 210 0 1 0
+
+usePart 2B_leftarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftleg
+rotate 20 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+usePart 2B_leftfeet
+rotate 10 1 0 0
+
+time 49
+
+usePart 2B_rightthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_rightfeet
+scale 1 0.5 1
+
+
+time 50
+
+usePart 2B_rightarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftthight
+scale 1 1 1
+usePart 2B_leftfeet
+scale 1 1 1
+usePart 2B_rightthight
+scale 1.2 3 1.2
+
+usePart 2B_rightleg
+rotate 20 1 0 0
+usePart 2B_rightfeet
+rotate 10 1 0 0
+
+time 51
+usePart 2B_leftarm
+rotate -30 1 0 1
+
+usePart 2B_leftleg
+rotate -40 1 0 0
+usePart 2B_leftthight
+rotate 40 1 0 0
+usePart 2B_leftfeet
+rotate 20 1 0 0
+
+time 52
+usePart 2B_body
+translate -28 24 -60
+rotate 270 0 1 0
+
+usePart 2B_leftfeet
+rotate 0 1 0 0
+
+usePart 2B_rightleg
+rotate 10 1 0 0
+usePart 2B_rightfeet
+rotate -20 1 0 0
+
+usePart Mario_hat
+scale 2 2 2
+translate 5 5 20
+rotate 60 0 1 0
+
+time 53
+
+usePart 2B_leftleg
+rotate -10 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_leftfeet
+rotate 0 1 0 0
+scale 1 0.5 1
+
+time 54
+usePart 2B_rightthight
+scale 1 1 1
+
+time 55
+usePart 2B_rightthight
+rotate 60 1 0 0
+usePart 2B_rightfeet
+scale 1 1 1
+
+usePart Petilil
+translate 0 10 -50
+rotate -30 0 1 1
+
+time 56
+usePart 2B_body
+translate -18 23 -18
+rotate 0 0 1 0
+
+usePart 2B_rightarm
+rotate -30 1 0 0.1
+
+usePart 2B_rightleg
+rotate -40 1 0 0
+usePart 2B_rightfeet
+rotate -30 1 0 0
+
+
+time 57
+usePart 2B_leftarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftleg
+rotate 20 1 0 0
+usePart 2B_leftthight
+rotate 0 1 0 0
+usePart 2B_leftfeet
+rotate 10 1 0 0
+
+
+
+time 58
+
+usePart 2B_rightthight
+rotate 0 1 0 0
+scale 1.2 3 1.2
+usePart 2B_rightfeet
+scale 1 0.5 1
+
+usePart Mario_hat
+scale 1 1 1
+translate 0 1 0
+rotate 120 0 1 0
+
+
+time 59
+usePart 2B_rightarm
+rotate 30 1 0 0.1
+
+usePart 2B_leftthight
+scale 1 1 1
+usePart 2B_leftfeet
+scale 1 1 1
+usePart 2B_rightthight
+scale 1.2 3 1.2
+
+usePart 2B_rightleg
+rotate 20 1 0 0
+usePart 2B_rightfeet
+rotate 10 1 0 0
+
+time 61

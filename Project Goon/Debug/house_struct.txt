@@ -1,0 +1,2 @@
+usePart Cabin
+translate 0 -134 0

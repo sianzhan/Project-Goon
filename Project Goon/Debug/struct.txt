@@ -1,0 +1,84 @@
+usePart Petilil
+pivot 10 20 0
+translate -10 30 0
+
+usePart 2B_body
+pivot 0 0 0
+scale 1 1 1
+translate 0 0 -10
+pushMatrix
+usePart 2B_head
+pivot 0 34 -1
+head 0 35 4  0 45 60  0 50 -20
+rotate -10 1 0 0
+pivot 0 33 -0.5
+pushMatrix
+usePart Mario_hat
+pivot 0 0 10
+translate 0 38 5
+scale 1.5 1.5 1.5
+popMatrix
+usePart 2B_leftarm
+pivot 2 31 -0.5
+pushMatrix
+usePart 2B_leftforearm
+pivot 6.5 27.5 -1
+pushMatrix
+usePart 2B_lefthand
+pivot 10.0 24.7 2.2
+popMatrix
+popMatrix
+
+usePart 2B_rightarm
+pivot -2 31 -0.5
+pushMatrix
+usePart Umbreon
+pivot 0 -1.5 0
+translate -3 33.2 -0.4
+scale 1.1 1.1 1.1
+rotate 10 0 1 1
+usePart 2B_rightforearm
+pivot -6.5 27.5 -1
+pushMatrix
+usePart 2B_righthand
+pivot -10.0 24.7 2.2
+pushMatrix
+usePart Katana
+pivot -0.5 1.9 0.5
+translate -10.9 22.2 2.2
+scale 0.1 0.1 -0.1
+rotate -90 0 0 1
+rotate -10 0 1 0
+rotate -30 0 0 1
+popMatrix
+popMatrix
+popMatrix
+
+usePart 2B_leftleg
+pivot 1.2 23.3 0
+translate 0 -2 0
+rotate -2 0 0 1
+pushMatrix
+usePart 2B_leftthight
+pivot 3.1 12.2 -0.4
+translate 0 0.5 0
+pushMatrix
+usePart 2B_leftfeet
+pivot 3.8 3.7 -0.3
+popMatrix
+popMatrix
+
+usePart 2B_rightleg
+pivot -1.2 23.3 0
+translate 0 -2 0
+rotate 2 0 0 1
+pushMatrix
+usePart 2B_rightthight
+pivot -3.1 12.2 -0.2
+translate 0 0.5 0
+pushMatrix
+usePart 2B_rightfeet
+pivot -3.8 3.7 -0.3
+popMatrix
+popMatrix
+popMatrix

@@ -250,3 +250,10 @@ ModelManifest.xml
 !/Project Goon/Debug/*.obj
 !/Project Goon/Debug/*.mtl
 !/Project Goon/Debug/*.png
+!/Project Goon/Debug/*.txt
+!/Project Goon/Debug/*.frag
+!/Project Goon/Debug/*.vert
+!/Project Goon/Debug/*.geo
+!/Project Goon/Debug/shaders/*
+!/Project Goon/Debug/cabin/*
+!/Project Goon/Debug/2B/*

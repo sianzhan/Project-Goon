@@ -125,7 +125,6 @@
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="RobotLoader.cpp" />
-    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>

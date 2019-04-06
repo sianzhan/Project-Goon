@@ -1,0 +1,30 @@
+struct struct.txt
+script script.txt
+shader shaders.txt
+Umbreon UmbreonLowPoly.obj UmbreonLowPoly.mtl
+
+Petilil Churineout.obj Churineout.mtl
+Mario_hat mario_hat.obj mario_hat.mtl
+Katana katana.obj katana.mtl
+#2B 2B.obj 2B.mtl
+w
+2B_body 2B/body.obj 2B/body.mtl
+2B_head 2B/head.obj 2B/head.mtl
+
+2B_leftarm 2B/leftarm.obj 2B/leftarm.mtl
+2B_leftfeet 2B/leftfeet.obj 2B/leftfeet.mtl
+2B_leftforearm 2B/leftforearm.obj 2B/leftforearm.mtl
+2B_lefthand 2B/lefthand.obj 2B/lefthand.mtl
+2B_leftleg 2B/leftleg.obj 2B/leftleg.mtl
+2B_leftthight 2B/leftthight.obj 2B/leftthight.obj
+
+2B_rightarm 2B/rightarm.obj 2B/rightarm.mtl
+2B_rightfeet 2B/rightfeet.obj 2B/rightfeet.mtl
+2B_rightforearm 2B/rightforearm.obj 2B/rightforearm.mtl
+2B_righthand 2B/righthand.obj 2B/righthand.mtl
+2B_rightleg 2B/rightleg.obj 2B/rightleg.mtl
+2B_rightthight 2B/rightthight.obj 2B/rightthight.obj
+
+#2B_head_1 2B/head.obj 2B/head.mtl
+#2B_head_2 2B/head.obj 2B/head.mtl
+#2B_head_3 2B/head.obj 2B/head.mtl

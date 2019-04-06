@@ -1,0 +1,7 @@
+GL_VERTEX_SHADER shaders/default_vs_gs.vert GL_FRAGMENT_SHADER shaders/default.frag GL_GEOMETRY_SHADER  shaders/default.geo
+GL_VERTEX_SHADER shaders/default.vert GL_FRAGMENT_SHADER shaders/pixelate_home.frag
+GL_VERTEX_SHADER shaders/default.vert GL_FRAGMENT_SHADER shaders/house_electrowave.frag
+GL_VERTEX_SHADER shaders/default.vert GL_FRAGMENT_SHADER shaders/house_digital.frag
+GL_VERTEX_SHADER shaders/default.vert GL_FRAGMENT_SHADER shaders/nightvision.frag
+GL_VERTEX_SHADER shaders/distort.vert GL_FRAGMENT_SHADER shaders/default.frag GL_GEOMETRY_SHADER  shaders/default.geo
+GL_VERTEX_SHADER shaders/default.vert GL_FRAGMENT_SHADER shaders/blank.frag

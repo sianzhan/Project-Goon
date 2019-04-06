@@ -1,0 +1,225 @@
+newmtl Rshoulder:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl body:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl body:Object01SG4
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_head_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl head:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl head:Object01SG2
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl head:Object01SG4
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_head_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl head:Object01SG6
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_hair1_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl head:Object01SG8
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_hair2_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl head:Object01SG12
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_hair1_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl leftarm:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl leftfeet:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl leftforearm:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl leftforearm:Object01SG10
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_hair1_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl lefthand:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl leftleg:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl leftleg:Object01SG4
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_head_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl leftthight:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl rightarm:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl rightfeet:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl rightforearm:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl rightforearm:Object01SG10
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_hair1_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl righthand:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl rightleg:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl rightleg:Object01SG4
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_head_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl rightthight:Object01SG
+illum 4
+Kdd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd 2b_suit_dif.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
